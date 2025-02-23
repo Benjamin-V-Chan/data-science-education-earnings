@@ -1,5 +1,16 @@
+import pandas as pd
+
 # Load dataset
-# Handle missing values by filling, dropping, or imputing
+df = pd.read_csv("../data/labor_force_earnings.csv")
+
 # Rename columns for clarity
-# Convert data types as needed
+df.columns = df.columns.str.lower().str.replace(" ", "_")
+
+# Handle missing values
+df.fillna(method='ffill', inplace=True)
+
+# Convert year to integer
+df['year'] = df['year'].astype(int)
+
 # Save cleaned dataset
+df.to_csv("../data/cleaned_labor_force_earnings.csv", index=False)
